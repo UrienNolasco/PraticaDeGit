@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 public class App {
     public static void main(String[] args) {
         ArrayList<Integer> lista = new ArrayList<>();
@@ -7,12 +9,17 @@ public class App {
         lista.add(2);
         lista.add(8);
         lista.add(2);
-
+        lista.add(5);
+        
         Integer elemento = 2;
         int ocorrencias = nOcorrencias(lista, elemento);
         System.out.println("Ocorrências de " + elemento + ": " + ocorrencias);
+
+        ArrayList<Integer> elementosRepetidos = listRepeat(lista);
+        System.out.println("Elementos repetidos: " + elementosRepetidos);
     }
 
+    //MÉTODO A
     public static int nOcorrencias(ArrayList<Integer> l, Integer el) {
         int count = 0;
         for (Integer num : l) {
@@ -21,5 +28,23 @@ public class App {
             }
         }
         return count;
+    }
+
+    //MÉTODO D
+    public static ArrayList<Integer> listRepeat(ArrayList<Integer> l) {
+        ArrayList<Integer> elementosRepetidos = new ArrayList<>();
+        Map<Integer, Integer> occurrences = new HashMap<>();
+
+        for (Integer num : l) {
+            occurrences.put(num, occurrences.getOrDefault(num, 0) + 1);
+        }
+
+        for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
+            if (entry.getValue() > 1) {
+                elementosRepetidos.add(entry.getKey());
+            }
+        }
+
+        return elementosRepetidos;
     }
 }
